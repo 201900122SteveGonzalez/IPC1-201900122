@@ -1,0 +1,40 @@
+REQUISITOS PARA CURSAR IPC1: tener aprobada matemática básica 2, y contar con al menos 34 créditos
+PSEUDOCÓGIDO:
+1. Inicio
+2. Escribir "¿cumple con los requisitos para llevar el curso?"
+3. leer respuesta
+4. sí respuesta = no
+5 .Escribir "no puede cursar IPC1"
+6 .sino
+7 .Escribir "si puede cursar IPC1"
+8 .Escribir "Ingrese la sección que desea consultar A o B"
+9 .Leer sección
+10. Sí sección == "A" 
+11. Escribir cantidad de estudiantes asignados en sección A
+12. Leer cantidad de estudiantes asignados en sección A
+13. Sí cantidad de estudiantes asignados en sección A = 15
+14. Escribir "cupo lleno, consulte en la otra sección"
+15. Sí 0<=cantidad de estudiantes asignados en sección A<15
+16. Escribir "aún hay cupo, puede asignarse en esta sección"
+17. Escribir "¿desea asignarse en esta sección?"
+18. Leer asignado
+19. Si asignado =="si"
+20. Escribir " asignación en sección A completada"
+21. Si asignado =="no"
+22. Regresar al paso 8
+23. Sí sección == "B" 
+24. Escribir cantidad de estudiantes asignados en sección B
+25. Leer cantidad de estudiantes asignados en sección B
+26. Sí cantidad de estudiantes asignados en sección B = 15
+27. Escribir "cupo lleno, consulte en la otra sección"
+28. Sí 0<=cantidad de estudiantes asignados en sección B<15
+29. Escribir "aún hay cupo, puede asignarse en esta sección"
+30. Escribir "¿desea asignarse en esta sección?"
+31. Leer asignado
+32. Si asignado =="si"
+33. Escribir " asignación en sección B completada"
+34. Si asignado =="no"
+35. Regresar al paso 8
+36. Sí cantidad de estudiantes asignados en sección A = 15 y cantidad de estudiantes asignados en sección B = 15
+37. Escribir "ambas secciones están llenas, intente abrir una nueva sección para asignarse IPC1"
+38. Fin.
