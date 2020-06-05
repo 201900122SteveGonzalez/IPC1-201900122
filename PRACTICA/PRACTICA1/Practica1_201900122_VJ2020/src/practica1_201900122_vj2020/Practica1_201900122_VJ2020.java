@@ -17,7 +17,7 @@ public class Practica1_201900122_VJ2020 {
     public static void main(String[] args) {
         // TODO code application logic here
         Menu iniciar = new Menu();
-        iniciar.Menuprincipal();
+        iniciar.MENU_PRINCIPAL();
     }
     
 }
