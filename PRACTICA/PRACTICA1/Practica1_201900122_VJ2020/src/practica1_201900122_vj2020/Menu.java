@@ -10,17 +10,18 @@ import java.util.Scanner;
  * @author Steve Gonzalez
  */
 public class Menu {
-Scanner teclado = new Scanner(System.in);
 Barcos barco = new Barcos();
 public  boolean salir;
 public  boolean salir2;
 public  boolean salir3;
 public String coordenadas;
 Tablero tablero = new Tablero();
-    public void MENU_PRINCIPAL(){
+public int total_barcos_en_tablero;
+    public Menu() {
+   Scanner teclado = new Scanner(System.in);
     int opcion;  
         do{
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("############## MENU PRINCIPAL ##############");
             System.out.println("## 1) CREAR TABLERO ##");
             System.out.println("## 2) REPORTE COMPLETO ##");
@@ -39,29 +40,30 @@ Tablero tablero = new Tablero();
                     REPORTE_VICTORIAS();
                     break;
                 case 4:
-                    salir = true;
+                    this.salir = true;
                     System.exit(0);
                     break;            
                 default : 
                     System.out.println("ERROR, porfavor ingrese un numero entero del 1 al 4");
-                    salir = false;
+                    this.salir = false;
             }
-        } while(salir==false);
+        } while(this.salir==false);
         }
     
-    public void REPORTE_COMPLETO() {
+    private void REPORTE_COMPLETO() {
         // muestra listado de los usuarios y el estado de la partida. Si ganó, perdió o abandonó la partida.
     }
-    public void REPORTE_VICTORIAS() {
+    private void REPORTE_VICTORIAS() {
     }
       // con ordenamiento de burbuja muestra el listado de los usuarios que ganaron
    // su partida, serán ordenados de menor a mayor según la cantidad de intentos que
     // necesitaron para ganar la partida.
-    public void MENU_TABLERO() {
+    private void MENU_TABLERO() {
+        Scanner teclado = new Scanner(System.in);
         //el tablero por defecto es de 10x10
         int opcion2;  
         do{
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n");
             System.out.println("############## MENU TABLERO ##############");
             System.out.println("## 1) INGRESAR BARCOS ##");
             System.out.println("## 2) CAMBIAR CANTIDAD DE INTENTOS ##");
@@ -88,30 +90,32 @@ Tablero tablero = new Tablero();
                     REINICIAR_TABLERO();
                     break;   
                 case 6:
-                    MENU_PRINCIPAL();
+                    this.salir = false;
+                    this.salir2 = true;
                     break;   
                 default : 
                     System.out.println("ERROR, porfavor ingrese un numero entero del 1 al 6");
-                    salir2 = false;
+                    this.salir2 = false;
             }
-        } while(salir2 == false);
+        } while(this.salir2 == false);
     }
     
-     public void CAMBIAR_CANTIDAD_DE_INTENTOS() {
+     private void CAMBIAR_CANTIDAD_DE_INTENTOS() {
     }
      
-     public void INICIAR_JUEGO() {
+     private void INICIAR_JUEGO() {
     }
      
-     public void VISUALIZAR_EL_TABLERO() {
+     private void VISUALIZAR_EL_TABLERO() {
          tablero.Imprimir_tablero();
     }
      
-     public void REINICIAR_TABLERO(){
+     private void REINICIAR_TABLERO(){
          tablero.Limpiar_tablero();
      }
     
-     public void MENU_BARCOS() {
+     private void MENU_BARCOS() {
+        Scanner teclado = new Scanner(System.in);
           int opcion3;  
         do{
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -146,66 +150,80 @@ Tablero tablero = new Tablero();
         } while(salir3 == false);
     }
      
-     public void INSERTAR_PORTAAVIONES(){
+     private void INSERTAR_PORTAAVIONES(){
+        Scanner teclado = new Scanner(System.in);
          System.out.println("Ingrese las coordenadas del PORTAAVIONES con el siguiente formato: '(FilaInicio,ColumnaInicio)- (FilaFin,ColumnaFin)' ");
-         coordenadas = teclado.nextLine();
-         barco.Obtener_coordenadas(coordenadas);
+         this.coordenadas = teclado.nextLine();
+         barco.Obtener_coordenadas(this.coordenadas);
          barco.Portaaviones();
-         MENU_BARCOS();
-         tablero.barcos_en_tablero();
-         if (tablero.barcos_en_tablero()==21){
+         this.total_barcos_en_tablero = tablero.barcos_en_tablero();
+         if (this.total_barcos_en_tablero==21){
              tablero.Imprimir_tablero();
-         }
+         }else{
+             System.out.println("tablero actual");
+             tablero.Imprimir_tablero();
+            MENU_BARCOS();
+         } 
      }
-     public void INSERTAR_SUBMARINOS(){
+     
+     private void INSERTAR_SUBMARINOS(){
+         Scanner teclado = new Scanner(System.in);
          System.out.println("Ingrese las coordenadas de los 3 SUBMARINOS con el siguiente formato: '(FilaInicio,ColumnaInicio)- (FilaFin,ColumnaFin)' ");
          for (int i=1; i<5; i++){
-         coordenadas = teclado.nextLine();
-         barco.Obtener_coordenadas(coordenadas);
+         this.coordenadas = teclado.nextLine();
+         barco.Obtener_coordenadas(this.coordenadas);
          barco.Submarino();
          if(i>=4){
              System.out.println("ERROR, ya ingreso 3 barcos");
              MENU_BARCOS();
          }
-        tablero.barcos_en_tablero();
-         if (tablero.barcos_en_tablero()==21){
+        this.total_barcos_en_tablero = tablero.barcos_en_tablero();
+         if (this.total_barcos_en_tablero==21){
              tablero.Imprimir_tablero();
+         }else{
+            MENU_BARCOS();
          }
         }
      }
-     public void  INSERTAR_DESTRUCTORES(){
+     private void  INSERTAR_DESTRUCTORES(){
+        Scanner teclado = new Scanner(System.in);
          System.out.println("Ingrese las coordenadas de los 3 DESTRUCTORES con el siguiente formato: '(FilaInicio,ColumnaInicio)- (FilaFin,ColumnaFin)' ");
          for (int i=1; i<5; i++){
-         coordenadas = teclado.nextLine();
-         barco.Obtener_coordenadas(coordenadas);
+         this.coordenadas = teclado.nextLine();
+         barco.Obtener_coordenadas(this.coordenadas);
          barco.Destructores();
          if(i>=4){
              System.out.println("ERROR, ya ingreso 3 barcos");
              MENU_BARCOS();
          }
-         tablero.barcos_en_tablero();
-         if (tablero.barcos_en_tablero()==21){
+         this.total_barcos_en_tablero = tablero.barcos_en_tablero();
+         if (this.total_barcos_en_tablero==21){
              tablero.Imprimir_tablero();
+         }else{
+            MENU_BARCOS();
          }
         }
      }
-     public void INSERTAR_FRAGATAS(){
+     private void INSERTAR_FRAGATAS(){
+         Scanner teclado = new Scanner(System.in);
           System.out.println("Ingrese las coordenadas de las 2 FRAGATAS con el siguiente formato: '(Fila,Columna)' ");
          for (int i=1; i<4; i++){
-         coordenadas = teclado.nextLine();
-         barco.Obtener_coordenadas_simples(coordenadas);
+         this.coordenadas = teclado.nextLine();
+         barco.Obtener_coordenadas_simples(this.coordenadas);
          barco.Fragatas();
          if(i>=3){
              System.out.println("ERROR, ya ingreso 2 barcos");
              MENU_BARCOS();
          }
-         tablero.barcos_en_tablero();
-         if (tablero.barcos_en_tablero()==21){
+         this.total_barcos_en_tablero = tablero.barcos_en_tablero();
+         if (this.total_barcos_en_tablero==21){
              tablero.Imprimir_tablero();
+         }else{
+            MENU_BARCOS();
          }
         }
      }
-     public void INSERTAR_EASTER_EGG(){
+     private void INSERTAR_EASTER_EGG(){
      }
 
     }

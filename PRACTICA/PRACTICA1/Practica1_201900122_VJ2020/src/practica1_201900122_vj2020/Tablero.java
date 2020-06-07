@@ -99,7 +99,7 @@ public class Tablero {
     public int barcos_en_tablero(){
         for(int filas = 0; filas<10; filas++){ 
        for(int columnas = 0; columnas<10; columnas++){ 
-           if(this.tablero[filas][columnas] == "O"){
+           if("O".equals(this.tablero[filas][columnas])){
                contador_de_barcos = contador_de_barcos+1;
            }
        }
