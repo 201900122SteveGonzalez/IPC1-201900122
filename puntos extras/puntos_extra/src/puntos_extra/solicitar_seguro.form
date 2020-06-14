@@ -128,7 +128,7 @@
     </Component>
     <Component class="java.awt.Button" name="button1">
       <Properties>
-        <Property name="label" type="java.lang.String" value="button1"/>
+        <Property name="label" type="java.lang.String" value="registrar"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
       <Events>

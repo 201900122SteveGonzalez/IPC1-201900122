@@ -58,7 +58,7 @@ public class solicitar_seguro extends javax.swing.JFrame {
             }
         });
 
-        button1.setLabel("button1");
+        button1.setLabel("registrar");
         button1.setName(""); // NOI18N
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
