@@ -16,9 +16,7 @@ public class PROYECTO1_201900122_VJ2020 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-   MENU_PRINCIPAL ASEGURADORA = new MENU_PRINCIPAL(); 
-
-   
+   MENU_PRINCIPAL ASEGURADORA = new MENU_PRINCIPAL();   
     }
     
 }

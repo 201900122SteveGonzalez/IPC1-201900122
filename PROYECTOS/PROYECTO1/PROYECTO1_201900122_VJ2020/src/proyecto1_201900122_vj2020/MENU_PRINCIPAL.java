@@ -12,9 +12,11 @@ import javax.swing.JOptionPane;
  */
 public class MENU_PRINCIPAL extends javax.swing.JFrame {
    FondoPanel fondo = new FondoPanel();
-   SOLICITAR_SEGURO_AUTOMAS solicitud_seguro = new SOLICITAR_SEGURO_AUTOMAS();
    TIPO_USUARIO tipo_usuario = new TIPO_USUARIO();
    CARGAR_DATOS cargar_datos = new CARGAR_DATOS();
+    public static DATOS_MASIVOS datos = new DATOS_MASIVOS() {
+    };
+ //  DATOS_MASIVOS datos = new DATOS_MASIVOS();
    
 
     public MENU_PRINCIPAL() {
@@ -47,6 +49,11 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Algerian", 0, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 153));
         jButton1.setText("solicitar seguro");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -167,9 +174,23 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       solicitud_seguro.setVisible(true);
-       this.setVisible(false);
-        // TODO add your handling code here:
+//    DATOS_MASIVOS datos = new DATOS_MASIVOS();
+    SOLICITAR_SEGURO_AUTOMAS solicitud_seguro = new SOLICITAR_SEGURO_AUTOMAS();
+//    solicitud_seguro.tipo_de_vehiculo.removeAllItems();
+//        for (String Tipo_nombre : DATOS_MASIVOS.Tipo_nombre) {
+//        if (Tipo_nombre != null) {
+//            solicitud_seguro.tipo_de_vehiculo.addItem(Tipo_nombre);
+//        }
+//    }
+//     for(int i=0; i<DATOS_MASIVOS.posicion_tipo; i++){
+//         solicitud_seguro.tipo_de_vehiculo.addItem(DATOS_MASIVOS.Tipo_nombre[i]);
+//     }
+//        System.out.println("posicion tipo = "+DATOS_MASIVOS.posicion_tipo);
+//        System.out.println("primer dato: "+DATOS_MASIVOS.Tipo_nombre[0]);
+//        System.out.println("segundo dato: "+DATOS_MASIVOS.Tipo_nombre[1]);
+//        System.out.println("tercer dato: "+DATOS_MASIVOS.Tipo_nombre[2]);
+     solicitud_seguro.setVisible(true);
+     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -188,13 +209,20 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
       tipo_usuario.setVisible(true);
       this.setVisible(false);
         // TODO add your handling code here:
+        //seeerrrrrengvnr3tjignjtngnt/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.setVisible(false);
         cargar_datos.setVisible(true);
+       // solicitud_seguro.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -224,11 +252,8 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MENU_PRINCIPAL().setVisible(true);
-                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MENU_PRINCIPAL().setVisible(true);
         });
     }
 

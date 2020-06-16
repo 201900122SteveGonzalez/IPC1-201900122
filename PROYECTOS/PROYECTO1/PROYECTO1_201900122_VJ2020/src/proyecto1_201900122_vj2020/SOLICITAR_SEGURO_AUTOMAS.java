@@ -14,12 +14,66 @@ import javax.swing.JPanel;
  */
 public class SOLICITAR_SEGURO_AUTOMAS extends javax.swing.JFrame {
 FondoPanel fondo = new FondoPanel();
+public String nombres;
+public String apellidos;
+public String DPI;
+public String telefono;
+public double valor_establecido;//VALOR ESTABLECIDO O AVALOR MAXIMO A ASEGURAR
+public double valor_real;
+public double porcentaje_depreciacion;
+public double PTR;//PORCENTAJE TOTAL DE RIESGO=porcentaje_marca+porcentaje_linea+porcentaje_uso
+public double porcentaje_marca;
+public double porcentaje_linea;
+public double porcentaje_uso;
+public double PT; //PRIMA TOTAL= valor_establecido*(0.1+PTR)
+public double Cp; //Costo de la prima = PT/12
+public double cd; //COSTO DEL DEDUCIBLE = 0.07*valor_establecido
+//DATOS_MASIVOS datos = new DATOS_MASIVOS() {};
     /**
      * Creates new form SOLICITAR_SEGURO_AUTOMAS
      */
     public SOLICITAR_SEGURO_AUTOMAS() {
         this.setContentPane(fondo);
-        initComponents();
+        initComponents();       
+         this.tipo_vehiculo.removeAllItems();
+         for(int i=0; i<DATOS_MASIVOS.getPosicion_tipo(); i++){
+           if(DATOS_MASIVOS.getTipo_nombre()[i]!=null){
+        String dato_auxiliar = DATOS_MASIVOS.getTipo_nombre()[i];
+         this.tipo_vehiculo.addItem(dato_auxiliar);
+           }
+         }
+         this.uso_vehiculo.removeAllItems();
+         for(int i=0; i<DATOS_MASIVOS.getPosicion_uso(); i++){
+           if(DATOS_MASIVOS.getUso_nombre()[i]!=null){
+        String dato_auxiliar = DATOS_MASIVOS.getUso_nombre()[i];
+         this.uso_vehiculo.addItem(dato_auxiliar);
+           }
+         }
+         this.marca.removeAllItems();
+         for(int i=0; i<DATOS_MASIVOS.getPosicion_marca(); i++){
+           if(DATOS_MASIVOS.getMarca_nombre()[i]!=null){
+        String dato_auxiliar = DATOS_MASIVOS.getMarca_nombre()[i];
+         this.marca.addItem(dato_auxiliar);
+           }
+         }
+         this.linea.removeAllItems();
+         for(int i=0; i<DATOS_MASIVOS.getPosicion_linea(); i++){
+           if(DATOS_MASIVOS.getLinea_nombre()[i]!=null){
+        String dato_auxiliar = DATOS_MASIVOS.getLinea_nombre()[i];
+         this.linea.addItem(dato_auxiliar);
+           }
+         }
+         this.modelo.removeAllItems();
+         for(int i=0; i<DATOS_MASIVOS.getPosicion_modelo(); i++){
+           if(DATOS_MASIVOS.getModelo_año()[i]!=null){
+        String dato_auxiliar = DATOS_MASIVOS.getModelo_año()[i];
+         this.modelo.addItem(dato_auxiliar);
+           }
+         }
+//        this.PTR= this.porcentaje_marca+this.porcentaje_linea+this.porcentaje_uso;
+//        this.PT = this.valor_establecido*(0.1+this.PTR);
+//        this.Cp = this.PT/12;
+//        this.cd = 0.07*this.valor_establecido;
     }
 
     /**
@@ -47,22 +101,22 @@ FondoPanel fondo = new FondoPanel();
         textField2 = new java.awt.TextField();
         textField3 = new java.awt.TextField();
         textField4 = new java.awt.TextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        tipo_vehiculo = new javax.swing.JComboBox<>();
+        uso_vehiculo = new javax.swing.JComboBox<>();
+        marca = new javax.swing.JComboBox<>();
+        modelo = new javax.swing.JComboBox<>();
+        linea = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        textField5 = new java.awt.TextField();
+        costo_prima = new java.awt.TextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        textField6 = new java.awt.TextField();
+        costo_deducible = new java.awt.TextField();
         jLabel13 = new javax.swing.JLabel();
-        textField7 = new java.awt.TextField();
+        posible_costo_prima = new java.awt.TextField();
         jLabel14 = new javax.swing.JLabel();
-        textField8 = new java.awt.TextField();
+        posible_deducible = new java.awt.TextField();
         jButton3 = new javax.swing.JButton();
+        valor_de_vehiculo = new java.awt.TextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -114,17 +168,40 @@ FondoPanel fondo = new FondoPanel();
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Modelo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tipo_vehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Item 1", "Item 2", "Item 3", "Item 4"}));
+        tipo_vehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipo_vehiculoActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        uso_vehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        uso_vehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uso_vehiculoActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        marca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                marcaActionPerformed(evt);
+            }
+        });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        modelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        modelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeloActionPerformed(evt);
+            }
+        });
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        linea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        linea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lineaActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Algerian", 0, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 153));
@@ -151,6 +228,12 @@ FondoPanel fondo = new FondoPanel();
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Posible deducible");
 
+        posible_deducible.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                posible_deducibleActionPerformed(evt);
+            }
+        });
+
         jButton3.setFont(new java.awt.Font("Algerian", 0, 16)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 153));
         jButton3.setText("+deducible");
@@ -163,10 +246,20 @@ FondoPanel fondo = new FondoPanel();
         jButton4.setFont(new java.awt.Font("Algerian", 0, 16)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 153));
         jButton4.setText("-deducible");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Algerian", 0, 16)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 0, 153));
         jButton5.setText("solicitar seguro");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Algerian", 0, 16)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 0, 153));
@@ -187,75 +280,71 @@ FondoPanel fondo = new FondoPanel();
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(15, 15, 15)
-                                .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12)
-                                .addGap(21, 21, 21)
-                                .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox6, 0, 328, Short.MAX_VALUE)
-                                    .addComponent(textField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tipo_vehiculo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(uso_vehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(marca, 0, 328, Short.MAX_VALUE)
+                            .addComponent(linea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(modelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(valor_de_vehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel13)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textField7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textField8, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                                .addComponent(jButton6)))))
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel14)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(posible_deducible, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(posible_costo_prima, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(costo_prima, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(costo_deducible, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(129, 129, 129))
+                .addGap(132, 132, 132))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,65 +368,84 @@ FondoPanel fondo = new FondoPanel();
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tipo_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uso_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(linea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(valor_de_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(costo_prima, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(costo_deducible, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(posible_costo_prima, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(posible_deducible, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.PTR= this.porcentaje_marca+this.porcentaje_linea+this.porcentaje_uso;
+        this.PT = this.valor_establecido*(0.1+this.PTR);
+        this.Cp = this.PT/12;
+        this.cd = 0.07*this.valor_establecido;
+        this.costo_prima.setText(String.valueOf(this.costo_prima));
+        this.costo_deducible.setText(String.valueOf(this.cd));
+        this.posible_costo_prima.setText(String.valueOf(this.costo_prima));
+        this.posible_deducible.setText(String.valueOf(this.cd));
+        // TODO add your handling code here
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    double valor_inicial_deducible = Double.parseDouble(this.costo_deducible.getText());
+    double valor_final_deducible = valor_inicial_deducible+(valor_inicial_deducible*0.10);
+    this.posible_deducible.setText(String.valueOf(valor_final_deducible));
+    double valor_inicial_CP = Double.parseDouble(this.costo_prima.getText());
+    double valor_final_cp = valor_inicial_CP-(valor_inicial_CP*0.03);
+    this.posible_costo_prima.setText(String.valueOf(valor_final_cp));
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
+        this.setVisible(false);
+        MENU_PRINCIPAL regresar = new MENU_PRINCIPAL();
+        regresar.setVisible(true);
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -348,6 +456,119 @@ FondoPanel fondo = new FondoPanel();
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6MouseClicked
+
+    private void tipo_vehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_vehiculoActionPerformed
+for(int i=0; i<DATOS_MASIVOS.getPosicion_tipo(); i++){
+        if(DATOS_MASIVOS.getTipo_nombre()[i]!=null){
+    if(this.tipo_vehiculo.getSelectedItem() == DATOS_MASIVOS.getTipo_nombre()[i]){
+      double auxiliar = Double.parseDouble(DATOS_MASIVOS.getTipo_valorMaximo()[i]);
+       this.valor_establecido= auxiliar;
+//  this.textField9.setText(DATOS_MASIVOS.getTipo_valorMaximo()[i]);
+    }
+     }
+}
+      this.valor_real = this.valor_establecido-this.porcentaje_depreciacion*this.valor_establecido;
+        System.out.println("valor establecido = "+this.valor_establecido);
+        System.out.println("porcentaje de depreciacion = "+this.porcentaje_depreciacion);
+        System.out.println("valor de vehiculo o real = "+this.valor_real);
+        System.out.print(this.valor_real+" = ");
+        System.out.print(this.valor_establecido+"-");
+        System.out.print(this.porcentaje_depreciacion+"*");
+        System.out.print(this.valor_establecido);
+        this.valor_de_vehiculo.setVisible(true);
+        this.valor_de_vehiculo.setText(String.valueOf(this.valor_real));
+    }//GEN-LAST:event_tipo_vehiculoActionPerformed
+
+    private void marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaActionPerformed
+       for(int i=0; i<DATOS_MASIVOS.getPosicion_marca(); i++){
+        if(DATOS_MASIVOS.getMarca_nombre()[i]!=null){
+      if(this.marca.getSelectedItem() == DATOS_MASIVOS.getMarca_nombre()[i]){
+      double auxiliar = Double.parseDouble(DATOS_MASIVOS.getMarca_porcentaje_aumento_de_poliza()[i]);
+      this.porcentaje_marca  = auxiliar;     
+    }
+     }
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_marcaActionPerformed
+
+    private void modeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloActionPerformed
+      for(int i=0; i<DATOS_MASIVOS.getPosicion_modelo(); i++){
+        if(DATOS_MASIVOS.getModelo_porentaje_depreciacion()[i]!=null){
+    if(this.modelo.getSelectedItem() == DATOS_MASIVOS.getModelo_año()[i]){
+      double auxiliar = Double.parseDouble(DATOS_MASIVOS.getModelo_porentaje_depreciacion()[i]);
+       this.porcentaje_depreciacion  = auxiliar;     
+    }
+     }
+}
+      this.valor_real = this.valor_establecido-this.porcentaje_depreciacion*this.valor_establecido;
+        System.out.println("valor establecido = "+this.valor_establecido);
+        System.out.println("porcentaje de depreciacion = "+this.porcentaje_depreciacion);
+        System.out.println("valor de vehiculo o real = "+this.valor_real);
+        System.out.print(this.valor_real+" = ");
+        System.out.print(this.valor_establecido+"-");
+        System.out.print(this.porcentaje_depreciacion+"*");
+        System.out.print(this.valor_establecido);
+         this.valor_de_vehiculo.setVisible(true);
+        this.valor_de_vehiculo.setText(String.valueOf(this.valor_real));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modeloActionPerformed
+
+    private void posible_deducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posible_deducibleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_posible_deducibleActionPerformed
+
+    private void lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineaActionPerformed
+ for(int i=0; i<DATOS_MASIVOS.getPosicion_linea(); i++){
+        if(DATOS_MASIVOS.getLinea_nombre()[i]!=null){
+    if(this.linea.getSelectedItem() == DATOS_MASIVOS.getLinea_nombre()[i]){
+      double auxiliar = Double.parseDouble(DATOS_MASIVOS.getLinea_porcentaje_aumento_de_poliza()[i]);
+       this.porcentaje_linea  = auxiliar;     
+    }
+     }
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lineaActionPerformed
+
+    private void uso_vehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uso_vehiculoActionPerformed
+ for(int i=0; i<DATOS_MASIVOS.getPosicion_uso(); i++){
+        if(DATOS_MASIVOS.getUso_nombre()[i]!=null){
+    if(this.linea.getSelectedItem() == DATOS_MASIVOS.getUso_nombre()[i]){
+      double auxiliar = Double.parseDouble(DATOS_MASIVOS.getUso_porcentaje_aumento_de_poliza()[i]);
+       this.porcentaje_linea  = auxiliar;     
+    }
+     }
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uso_vehiculoActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    double valor_inicial_deducible = Double.parseDouble(this.costo_deducible.getText());
+    double valor_final_deducible = valor_inicial_deducible-(valor_inicial_deducible*0.10);
+    this.posible_deducible.setText(String.valueOf(valor_final_deducible));
+    double valor_inicial_CP = Double.parseDouble(this.costo_prima.getText());
+    double valor_final_cp = valor_inicial_CP+(valor_inicial_CP*0.03);
+    this.posible_costo_prima.setText(String.valueOf(valor_final_cp));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+datos_solicitud_seguro.setNombres(this.textField1.getText());
+datos_solicitud_seguro.setApellidos(this.textField2.getText());
+datos_solicitud_seguro.setDPI(this.textField3.getText());
+datos_solicitud_seguro.setTelefono(this.textField4.getText());
+datos_solicitud_seguro.setTipo((String) this.tipo_vehiculo.getSelectedItem());
+datos_solicitud_seguro.setUso((String) this.uso_vehiculo.getSelectedItem());
+datos_solicitud_seguro.setMarca((String) this.marca.getSelectedItem());
+datos_solicitud_seguro.setLinea((String) this.linea.getSelectedItem());
+datos_solicitud_seguro.setModelo((String) this.modelo.getSelectedItem());
+datos_solicitud_seguro.setMonto(String.valueOf(this.valor_establecido));
+datos_solicitud_seguro.setPoliza(this.posible_costo_prima.getText());
+datos_solicitud_seguro.setDeducible(this.posible_deducible.getText());
+datos_solicitud_seguro.colocar_CadenasDeTexto();
+datos_solicitud_seguro.almacenar_info_solicitud();
+datos_solicitud_seguro.setNoUsuario(datos_solicitud_seguro.getNoUsuario()+1);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -376,15 +597,19 @@ FondoPanel fondo = new FondoPanel();
         }
         //</editor-fold>
 
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SOLICITAR_SEGURO_AUTOMAS().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.TextField costo_deducible;
+    private java.awt.TextField costo_prima;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -392,12 +617,6 @@ FondoPanel fondo = new FondoPanel();
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -412,28 +631,30 @@ FondoPanel fondo = new FondoPanel();
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox<String> linea;
+    private javax.swing.JComboBox<String> marca;
+    private javax.swing.JComboBox<String> modelo;
+    private java.awt.TextField posible_costo_prima;
+    private java.awt.TextField posible_deducible;
     private java.awt.TextField textField1;
     private java.awt.TextField textField2;
     private java.awt.TextField textField3;
     private java.awt.TextField textField4;
-    private java.awt.TextField textField5;
-    private java.awt.TextField textField6;
-    private java.awt.TextField textField7;
-    private java.awt.TextField textField8;
+    public javax.swing.JComboBox<String> tipo_vehiculo;
+    private javax.swing.JComboBox<String> uso_vehiculo;
+    private java.awt.TextField valor_de_vehiculo;
     // End of variables declaration//GEN-END:variables
 class FondoPanel extends JPanel
 {
-
     private Image imagen;
-
     @Override
     public void paint(Graphics g)
     {
         imagen = new ImageIcon(getClass().getResource("/imagenes/seis.jpg")).getImage();
        g.drawImage(imagen ,0, 0, getWidth(), getHeight(), this);
-       
         setOpaque(false);
         super.paint(g);
     }
     }
+
 }

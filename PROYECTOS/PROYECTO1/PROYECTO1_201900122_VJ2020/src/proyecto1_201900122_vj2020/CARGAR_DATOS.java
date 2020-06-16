@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyecto1_201900122_vj2020;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,8 +10,6 @@ import javax.swing.JPanel;
  */
 public class CARGAR_DATOS extends javax.swing.JFrame {
 FondoPanel fondo = new FondoPanel();
-DATOS_MASIVOS datos = new DATOS_MASIVOS();
-//public boolean regresar;
 
     /**
      * Creates new form VENTANA_CARGAR_DATOS
@@ -97,44 +90,45 @@ DATOS_MASIVOS datos = new DATOS_MASIVOS();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                String[] linea = jTextArea1.getText().split("\n");
+
+ //   SOLICITAR_SEGURO_AUTOMAS solicitud_seguro = new SOLICITAR_SEGURO_AUTOMAS();
+        String[] linea = jTextArea1.getText().split("\n");
                 for(String dato : linea){ 
                 String[] info = dato.split(",");
                     switch (info[0]) {
                         case "TIPO":
-                         datos.guardar_tipo(info[1], info[2]);
-                         datos.posicion_tipo++;
+                         DATOS_MASIVOS.guardar_tipo(info[1], info[2]);
+                         DATOS_MASIVOS.setPosicion_tipo(DATOS_MASIVOS.getPosicion_tipo() + 1);
                          break;
                         case "MODELO":
-                         datos.guardar_modelo(info[1], info[2]);
-                         datos.posicion_modelo++;
+                         DATOS_MASIVOS.guardar_modelo(info[1], info[2]);
+                         DATOS_MASIVOS.setPosicion_modelo(DATOS_MASIVOS.getPosicion_modelo() + 1);
                          break;
                         case "MARCA":
-                         datos.guardar_marca(info[1], info[2]);
-                         datos.posicion_marca++;
+                         DATOS_MASIVOS.guardar_marca(info[1], info[2]);
+                         DATOS_MASIVOS.setPosicion_marca(DATOS_MASIVOS.getPosicion_marca() + 1);
                          break;
                         case "LINEA":
-                         datos.guardar_linea(info[1], info[2]);
-                         datos.posicion_linea++;
+                         DATOS_MASIVOS.guardar_linea(info[1], info[2]);
+                         DATOS_MASIVOS.setPosicion_linea(DATOS_MASIVOS.getPosicion_linea() + 1);
                          break;
                         case "USO":
-                         datos.guardar_uso(info[1], info[2]);
-                         datos.posicion_uso++;
+                         DATOS_MASIVOS.guardar_uso(info[1], info[2]);
+                         DATOS_MASIVOS.setPosicion_uso(DATOS_MASIVOS.getPosicion_uso() + 1);
                          break;
                         case "MECANICA":
-                         datos.guardar_mecanica(info[1], info[2]);
-                         datos.posicion_mecanica++;
+                         DATOS_MASIVOS.guardar_mecanica(info[1], info[2]);
+                         DATOS_MASIVOS.setPosicion_mecanica(DATOS_MASIVOS.getPosicion_mecanica() + 1);
                          break;
                         case "REPUESTO":
-                         datos.guardar_repuesto(info[1], info[2]);
-                         datos.posicion_repuesto++;
+                         DATOS_MASIVOS.guardar_repuesto(info[1], info[2]);
+                         DATOS_MASIVOS.setPosicion_repuesto(DATOS_MASIVOS.getPosicion_repuesto() + 1);
                          break;
                         default:
                          JOptionPane.showMessageDialog(null, "NO SE HA INGRESADO LA INFORMACION CON LA SINTAXIS CORRECTA"); 
                             break;
                     }
-                }  
-                //cargar datos obtenidos a combos box de ventana solicitar seguro
+                }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
@@ -143,11 +137,8 @@ DATOS_MASIVOS datos = new DATOS_MASIVOS();
         MENU_PRINCIPAL regresar = new MENU_PRINCIPAL();
         regresar.setVisible(true);
         this.dispose();
-        // TODO add your handling code here:
     }//GEN-LAST:event_cancelarActionPerformed
 
- 
-    
     /**
      * @param args the command line arguments
      */
@@ -190,17 +181,13 @@ DATOS_MASIVOS datos = new DATOS_MASIVOS();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
-class FondoPanel extends JPanel
-{
-
+class FondoPanel extends JPanel{
     private Image imagen;
-
     @Override
     public void paint(Graphics g)
     {
         imagen = new ImageIcon(getClass().getResource("/imagenes/dos.jpg")).getImage();
        g.drawImage(imagen ,0, 0, getWidth(), getHeight(), this);
-       
         setOpaque(false);
         super.paint(g);
     }
