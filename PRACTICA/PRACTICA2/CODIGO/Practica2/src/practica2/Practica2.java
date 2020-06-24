@@ -15,8 +15,7 @@ public class Practica2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       //Interfaz_grafica inicio = new Interfaz_grafica();
-        GALAGA inicio = new GALAGA();
+       Interfaz_grafica inicio = new Interfaz_grafica();
     }
     
 }

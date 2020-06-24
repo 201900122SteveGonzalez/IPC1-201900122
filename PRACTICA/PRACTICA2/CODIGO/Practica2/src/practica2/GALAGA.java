@@ -1,4 +1,6 @@
 package practica2;
+import estructuras.Nodo;
+import estructuras.lista_objetos;
 import hilos.*;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,38 +8,47 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class GALAGA {
-FondoPanel fondo;
-JFrame galaga;
-JButton game;
-int posicion_nave;
-int tiempo;//tiempo de reloj
-int rapidez;// para el tiempo de los objetos en caer
-JTextField nickname;
-JTextField poder;
-JTextField vidas;
-int contador_vidas;
-JTextField velocidad;
-JTextField punteo;
-JTextField tiempo_restante;
-JButton nave;
-private int clicks;
+    public static lista_objetos lista_asteroide1 = new lista_objetos(); ;// para ver choque con na
+    public static lista_objetos lista_vidas1 = new lista_objetos(); // para ver choque con na
+    public static lista_objetos lista_misiles = new lista_objetos();
+    public static lista_objetos lista_caracoles = new lista_objetos();
+    public static lista_objetos lista_invisibles = new lista_objetos();
+    public static lista_objetos lista_rayos = new lista_objetos();
+    FondoPanel fondo;
+    public static JFrame galaga;
+    JButton game;
+    public static int tiempo;//tiempo de reloj
+    public static int rapidez;// para el tiempo de los objetos en caer
+    public static JTextField nickname;
+    public static JTextField poder;//invisibilidad ojo
+    public static int contador_ojos;
+    public static JTextField vidas;//corazon asteroide
+    public static int contador_vidas;//corazon, asteroide
+    public static JTextField velocidad;//todos
+    public static int contador_punteo;
+    public static JTextField punteo;
+    public static JTextField tiempo_restante;//todos los objetos lo manejan
+    public static JButton nave = new JButton();//todos los objetos lo manejan
+    private int clicks;
+    public static int contador_corazones;//para listas enlazadas
 
-    public GALAGA() {
+
+    public GALAGA(String nombre_nickname) {
         JButton titulo = new JButton("★★★★★★★★ BIENVENIDO A GALAGA ★★★★★★★★");
+        nave.setBounds(84, 414, 64, 64);
+        nave.setBackground(Color.BLUE);
         titulo.setBounds(20, 20, 425, 50);
         titulo.setForeground(Color.WHITE);
         titulo.setBackground(Color.BLACK);
         titulo.enable(false);
-        rapidez=0;//este lo agregue 
-        clicks=0;
-        tiempo=10;
-        contador_vidas=3;
+        rapidez = 0;//este es para medir la velocidad
+        clicks = 0;
+        contador_punteo = 0;
+        tiempo = 240;
+        contador_vidas = 0;
         JLabel label1 = new JLabel("Vidas:");
         label1.setBounds(316, 134, 100, 30);
         label1.setBackground(Color.BLACK);
@@ -61,18 +72,18 @@ private int clicks;
         tiempo_restante = new JTextField(String.valueOf(tiempo));
         tiempo_restante.setBounds(341, 404, 80, 20);
         tiempo_restante.setBackground(Color.BLACK);
-        tiempo_restante.enable(false);  
-        
+        tiempo_restante.enable(false);
+
         JPanel soporte = new JPanel();
         soporte.setBounds(301, 74, 158, 420);
         soporte.setBackground(Color.BLACK);
-  
-        nickname = new JTextField("USUARIO");
-        nickname.setBounds(316, 94, 128, 30); 
+
+        nickname = new JTextField(nombre_nickname);
+        nickname.setBounds(316, 94, 128, 30);
         nickname.setBackground(Color.BLACK);
         nickname.enable(false);
         vidas = new JTextField(String.valueOf(contador_vidas));
-        vidas.setBounds(380, 164, 64, 20); 
+        vidas.setBounds(380, 164, 64, 20);
         vidas.setBackground(Color.BLACK);
         vidas.enable(false);
         poder = new JTextField("0");
@@ -82,36 +93,24 @@ private int clicks;
         velocidad = new JTextField("0");
         velocidad.setBounds(380, 264, 64, 20);
         velocidad.setBackground(Color.BLACK);
-        velocidad.enable(false);       
+        velocidad.enable(false);
         punteo = new JTextField("0");
         punteo.setBounds(380, 314, 64, 20);
         punteo.setBackground(Color.BLACK);
         punteo.enable(false);
-        this.posicion_nave=148;
         fondo = new FondoPanel();
-     //   fondo2 = new FondoPanel2();
         galaga = new JFrame("VIDEOJUEGO GALAGA");
         galaga.setLayout(null);
         galaga.setBounds(435, 85, 500, 570);
-        galaga.setVisible(true);   
-        //galaga.setDefaultCloseOperation(1);
-        galaga.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        galaga.setVisible(true);
+        galaga.setDefaultCloseOperation(1);
+     //   galaga.setDefaultCloseOperation(EXIT_ON_CLOSE);
         fondo.setLayout(null);
-       // fondo.add(tablero);
         galaga.setContentPane(fondo);
-         nave = new JButton();
-        nave.setBounds(this.posicion_nave, 414, 64, 64);
-        nave.setBackground(Color.BLUE);
-//        JButton cambio = new JButton("alentar");
-//        cambio.setBounds(400, 414, 64, 64); 
-//        cambio.setBackground(Color.ORANGE);
-//        JButton reducir = new JButton("acelerar");
-//        reducir.setBounds(400, 340, 64, 64); 
-//        reducir.setBackground(Color.CYAN);
         game = new JButton("¡¡¡DESPEGAR!!!");
-        game.setBounds(320, 440, 120, 35); 
+        game.setBounds(320, 440, 120, 35);
         game.setBackground(Color.CYAN);
-        
+
         galaga.add(titulo);
         galaga.add(tiempo_restante);
         galaga.add(area);
@@ -127,97 +126,98 @@ private int clicks;
         galaga.add(game);
         galaga.add(vidas);
         galaga.add(soporte);
-         
-         galaga.repaint(); 
-         
+        galaga.repaint();
+        galaga.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
         game.addActionListener((ActionEvent ae) -> {
-        if(this.clicks==0){
-        hilo_corazon vida = new hilo_corazon(this.fondo, this.rapidez, Integer.parseInt(vidas.getText()), Integer.parseInt(tiempo_restante.getText()));
-        Thread generar_vida = new Thread(vida);
-        generar_vida.start();
-        hilo_rayo rayo = new hilo_rayo(this.fondo, this.rapidez);
-        Thread generar_rayo = new Thread(rayo);
-        generar_rayo.start();
-        hilo_caracol gary = new hilo_caracol(this.fondo, this.rapidez);
-        Thread generar_caracol = new Thread(gary);
-        generar_caracol.start();
-        hilo_ojo ojo = new hilo_ojo(this.fondo, this.rapidez);
-        Thread generar_ojo = new Thread(ojo);
-        generar_ojo.start();
-        hilo_asteroide asteroide = new hilo_asteroide(this.fondo, this.rapidez);
-        Thread generar_asteroide = new Thread(asteroide);
-        generar_asteroide.start();
-        hilo_tiempo temporal = new hilo_tiempo(tiempo, tiempo_restante, contador_vidas);
-        Thread correr_tiempo = new Thread(temporal);
-        correr_tiempo.start();
-         this.clicks++;
-        }else{
-//            int clock = Integer.parseInt(tiempo_restante.getText());
-//            int life = Integer.parseInt(vidas.getText());
-//            if(clock<=0 || life<=0){
-//                  
-//            }
-            System.out.println("JUEGO INICIADO ");
-        }
-         });
-       
-      game.addKeyListener(new KeyListener() {
-                 
-          @Override
-                 public void keyTyped(KeyEvent ke) {
-               }
+            if (this.clicks == 0) {
+                tiempo = 240;
+                tiempo_restante.setText(String.valueOf(tiempo));
+                contador_vidas = 3;
+                vidas.setText(String.valueOf(contador_vidas));
+                rapidez = 1;
+                velocidad.setText(String.valueOf(rapidez));
+                contador_ojos = 0;
+                poder.setText(String.valueOf(contador_ojos));
+                hilo_corazon plus = new hilo_corazon();
+                Thread generar_vida = new Thread(plus);
+                generar_vida.start();
+                hilo_rayo rayo = new hilo_rayo();
+                Thread generar_rayo = new Thread(rayo);
+                generar_rayo.start();
+                hilo_caracol gary = new hilo_caracol();
+                Thread generar_caracol = new Thread(gary);
+                generar_caracol.start();
+                hilo_ojo ojo = new hilo_ojo();
+                Thread generar_ojo = new Thread(ojo);
+                generar_ojo.start();
+                hilo_asteroide asteroide = new hilo_asteroide();
+                Thread generar_asteroide = new Thread(asteroide);
+                generar_asteroide.start();
+                hilo_tiempo temporal = new hilo_tiempo();
+                Thread correr_tiempo = new Thread(temporal);
+                correr_tiempo.start();
+                this.clicks++;
+            } else {
+            }
+        });
 
-                 @Override
-                 public void keyPressed(KeyEvent ke) {
+        game.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent ke) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent ke) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                switch (ke.getKeyCode()) {
+                    case 37://izquierda
+                        if (nave.getX() > 20) {
+                            nave.setBounds(nave.getX() - 64, nave.getY(), nave.getWidth(), nave.getHeight());
+                        }
+                        break;
+                    case 39://derecha
+                        if (nave.getX() < 212) {
+                            nave.setBounds(nave.getX() + 64, nave.getY(), nave.getWidth(), nave.getHeight());
+                        }
+                        break;
+                    case 40://abajo
+                        int contador = Integer.parseInt(poder.getText());
+                        hilo_invisible invisibilidad = new hilo_invisible(nave, contador);
+                        Thread volver_invisible = new Thread(invisibilidad);
+                        volver_invisible.start();
+                        contador--;
+                        if (contador >= 0) {
+                            poder.setText(String.valueOf(contador));
+                        }
+                        if (contador < 0) {
+                            poder.setText("0");
+                        }
+
+                        break;
+                    case 32://barra espaciadora
+                        int x = nave.getX();
+                        int y = nave.getY();
+                        JButton misil = new JButton();
+                        misil.setBounds(x, y, 64, 64);
+                        misil.setBackground(Color.ORANGE);
+                        fondo.add(misil);
+                        lista_misiles.agregar(misil);
+                        hilo_misil destructor = new hilo_misil(misil);
+                        Thread genear_misil = new Thread(destructor);
+                        genear_misil.start();
+                        GALAGA.galaga.repaint();
+                        break;
                 }
+            }
+        });
 
-                 @Override
-                 public void keyReleased(KeyEvent ke) {
-                     switch(ke.getKeyCode()){
-                         case 37://izquierda
-                             if(nave.getX()>20){
-                                 nave.setBounds(nave.getX()-64, nave.getY(), nave.getWidth(), nave.getHeight());
-                             }
-                             break;
-                            case 39://derecha
-                             if(nave.getX()<212){             
-                                 nave.setBounds(nave.getX()+64, nave.getY(), nave.getWidth(), nave.getHeight());
-                             }
-                             break;
-                             case 40://abajo
-                             int contador = Integer.parseInt(poder.getText());
-                             if(contador>0){
-                             //hilo de hacerse invisible durante 6 segundos
-                             nave.setBackground(Color.BLACK);
-                             }
-                             break;
-                             case 32://derecha
-                                int x = nave.getX();
-                                int y = nave.getY();
-                                JButton misil = new JButton();
-                                misil.setBounds(x, y, 64, 64);
-                                misil.setBackground(Color.ORANGE);
-                                fondo.add(misil);
-                                hilo_misil destructor = new hilo_misil(misil);
-                                Thread genear_misil = new Thread(destructor);
-                                genear_misil.start();
-                             break;
-                     }
-                 }
-             });
-        
-    } 
-//        cambio.addActionListener((ActionEvent ae1) -> {
-//       //     if(this.tiempo>300){
-//               this.tiempo = this.tiempo-300; 
-//        //    }
-//             });
-//        reducir.addActionListener((ActionEvent ae2) -> {
-//               this.tiempo = this.tiempo+300;      
-//             });
-//        }
-    
-    public static JButton CrearBoton(int ancho, int alto, int x, int y, Color color){
+    }
+
+    public static JButton CrearBoton(int ancho, int alto, int x, int y, Color color) {
         JButton boton = new JButton();
         boton.setBounds(x, y, ancho, alto);
         boton.setBackground(color);
@@ -227,6 +227,7 @@ private int clicks;
 
     class FondoPanel extends JPanel {
         private Image imagen;
+
         @Override
         public void paint(Graphics g) {
             imagen = new ImageIcon(getClass().getResource("/imagenes/fondo4.png")).getImage();
@@ -234,12 +235,6 @@ private int clicks;
             setOpaque(false);
             super.paint(g);
         }
-    }   
+    }
 
-    
-
-    
-    //esto tambien va en el cosntructor
-    //        galaga.add(cambio);
-//        galaga.add(reducir);
 }

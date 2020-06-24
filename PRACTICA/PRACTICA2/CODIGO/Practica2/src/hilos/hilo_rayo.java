@@ -3,26 +3,19 @@ package hilos;
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import practica2.GALAGA;
 
 public class hilo_rayo implements Runnable {
-    JPanel panel;
+
     Random posicion = new Random();
-    int tiempo;
-    public boolean condicion;
-    
-    public hilo_rayo(JPanel panel, int tiempo) {
-        this.panel = panel;
-        this.tiempo = tiempo;
-        this.condicion=true;
-    }
 
     @Override
     public void run() {
-        while (this.condicion=true) {
+        while (GALAGA.tiempo > 0 && GALAGA.contador_vidas > 0) {
             JButton flash = CrearRayo(64, 64, 20 + posicion.nextInt(4) * 64, 30, Color.YELLOW);
-            this.panel.add(flash);
-            mover_objetos movimiento = new mover_objetos(flash, this.tiempo);
+            GALAGA.galaga.add(flash);
+            GALAGA.lista_rayos.agregar(flash);
+            mover_objetos movimiento = new mover_objetos(flash);
             Thread hilo_flash = new Thread(movimiento);
             hilo_flash.start();
             try {
