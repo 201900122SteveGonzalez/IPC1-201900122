@@ -37,11 +37,11 @@ public class lista_circular {
           NodoCircular actual =this.getCabeza();
           while(actual.getSiguiente() != this.getCabeza()){
                       nodoActual++;
-              auxiliar = auxiliar+(("nodo" + (nodoActual-1) + " [label  = \"" + actual.getID() +","+actual.getValor() + "\"];\n"));
+              auxiliar = auxiliar+(("nodo" + actual.getID() + " [label  = \"" + actual.getID() +","+actual.getValor() + "\"];\n"));
               auxiliar = auxiliar+(("nodo" + (nodoActual-1)  + "->nodo" + nodoActual + "\n"));
               actual = actual.getSiguiente();
           }
-                      auxiliar = auxiliar+(("nodo" + (nodoActual) + " [label  = \"" + actual.getID() +","+actual.getValor() + "\"];\n"));
+                      auxiliar = auxiliar+(("nodo" + actual.getID() + " [label  = \"" + actual.getID() +","+actual.getValor() + "\"];\n"));
                       auxiliar = auxiliar+(("nodo" + (nodoActual)  + "->nodo1"  + "\n")); 
           String codigo = encabezado+auxiliar+cierre;
         text.setText(codigo); 
