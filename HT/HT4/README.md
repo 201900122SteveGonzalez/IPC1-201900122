@@ -1,9 +1,9 @@
 #  CAPTURAS HOJA DE TRABAJO 4
 ##  Captura 1 (sin insertar)
-![captura1](https://user-images.githubusercontent.com/66354474/85938387-39bfd800-b8ca-11ea-92e0-e0561c7420b9.png)
+![1](https://user-images.githubusercontent.com/66354474/85960975-87891e80-b964-11ea-9ca8-35c516e7295b.png)
 ##  Captura 2 (primera insercion)
-![captura2](https://user-images.githubusercontent.com/66354474/85938398-52c88900-b8ca-11ea-927a-e5c26ba2d742.png)
+![2](https://user-images.githubusercontent.com/66354474/85960995-b0111880-b964-11ea-8a56-f8ab3657488a.png)
 ##  Captura 3 (segunda insercion)
-![captura3](https://user-images.githubusercontent.com/66354474/85938404-670c8600-b8ca-11ea-9f4c-0dbd966f5648.png)
+![3](https://user-images.githubusercontent.com/66354474/85961040-ed75a600-b964-11ea-87f3-2350ca1813bb.png)
 ##  Captura 4 (tercera insercion)
-![captura4](https://user-images.githubusercontent.com/66354474/85938416-78ee2900-b8ca-11ea-9425-7a427b21d729.png)
+![4](https://user-images.githubusercontent.com/66354474/85961064-0e3dfb80-b965-11ea-8b32-119a1cf645c9.png)
