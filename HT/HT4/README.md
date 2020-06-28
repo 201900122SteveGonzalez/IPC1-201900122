@@ -1,2 +1,8 @@
-# IPC1-201900122
-tareas, hojas de trabajo, practicas y proyectos de IPC1 vacaciones de junio 2020
+#  CAPTURAS HOJA DE TRABAJO 4
+##  Captura 1 (sin insertar)
+
+##  Captura 2 (primera insercion)
+
+##  Captura 3 (aegunda insercion)
+
+##  Captura 4 (cuarta insercion)
