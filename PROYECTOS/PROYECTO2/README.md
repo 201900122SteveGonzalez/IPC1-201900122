@@ -10,28 +10,21 @@
 ![DIAGRAMA DE CLASES PROYECTO 2](https://user-images.githubusercontent.com/66354474/86331330-2ed8b080-bc06-11ea-819d-b4cf8fffd647.png)
 ## métodos utilizados
 
-## Clases utilizadas
-1. Primer elemento de la lista
-   - Primer elemento de la lista anidado
-     - Segundo elemento de la lista anidado
-     
+## Clases utilizadas    
 1. proyecto2 (main)
--PROYECTO2
--RecogeBloques
-
+ - PROYECTO2
+  - RecogeBloques
 2. Hilos
--hilo_temporal
- 
-#### 3. Listas_simples
--*Cola
--*Nodo
--*NodoBoton
--*Pila
--*Lista_objetos
--*lista_simple
- 
-#### 4. Listas_Doblemente_Enlazadas
-*NodoCircularDoble
-*NodoDoble
-*lista_circular_doblemente_enlazada
-*lista_doble
+ - hilo_temporal
+3. Listas_simples
+ - Cola
+  - Nodo
+   - NodoBoton
+    - Pila
+     - Lista_objetos
+      - lista_simple
+4. Listas_Doblemente_Enlazadas
+ - NodoCircularDoble
+  - NodoDoble
+   - lista_circular_doblemente_enlazada
+    - lista_doble
