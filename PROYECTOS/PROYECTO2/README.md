@@ -11,20 +11,25 @@
 ## métodos utilizados
 
 ## Clases utilizadas
-### 1 proyecto2 (main)
-#### 1.1.PROYECTO2
-##### 1.2 RecogeBloques
-### 2 Hilos
-2.1 hilo_temporal
-### 3 Listas_simples
-3.1 Cola
-3.2 Nodo
-3.3 NodoBoton
-3.4 Pila
-3.5 Lista_objetos
-3.6 lista_simple
-### 4 Listas_Doblemente_Enlazadas
-4.1 NodoCircularDoble
-4.2 NodoDoble
-4.3 lista_circular_doblemente_enlazada
-4.4 lista_doble
+
+#### 1.proyecto2 (main)
+-PROYECTO2
+-RecogeBloques
+
+ 
+#### 2. Hilos
+-hilo_temporal
+ 
+#### 3. Listas_simples
+-Cola
+-Nodo
+-NodoBoton
+-Pila
+-Lista_objetos
+-lista_simple
+ 
+#### 4. Listas_Doblemente_Enlazadas
+-NodoCircularDoble
+-NodoDoble
+-lista_circular_doblemente_enlazada
+-lista_doble
