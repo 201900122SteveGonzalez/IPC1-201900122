@@ -11,7 +11,10 @@
 ## métodos utilizados
 
 ## Clases utilizadas
-
+1. Primer elemento de la lista
+   - Primer elemento de la lista anidado
+     - Segundo elemento de la lista anidado
+     
 1. proyecto2 (main)
 -PROYECTO2
 -RecogeBloques
