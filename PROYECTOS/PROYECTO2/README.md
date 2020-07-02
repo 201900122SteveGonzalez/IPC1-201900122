@@ -9,7 +9,46 @@
 ## Diagrama de clases (General)
 ![DIAGRAMA DE CLASES PROYECTO 2](https://user-images.githubusercontent.com/66354474/86331330-2ed8b080-bc06-11ea-819d-b4cf8fffd647.png)
 ## métodos utilizados
-
+### Listas enleadas
+  -Constructor
+  -get cabeza
+  -set cabeza
+  -insertar
+  -verificacion de existencia de nodo
+  -eliminar
+  -imprimior codigo graphviz
+  -reiniciar
+### Nodos
+#### Nodo simples
+     -constructor
+     -get siguiente
+     -set siguiente
+     -set valor
+     'get valor
+     'set color
+     'get color
+     'set ID
+     'get ID
+#### Nodo dobles
+     -constructor
+     -get siguiente
+     -set siguiente
+     -get anterior
+     -set anterior
+     -set valor
+     'get valor
+     'set color
+     'get color
+     'set ID
+     'get ID
+ ### Recoge Bloques (clase principal)
+    -constructor
+    -crear interfaz grafica
+    -key listener (para el jugador)
+    -crear boton
+    -leer archivo
+    -colocar imagen de fondo
+     
 ## Clases utilizadas    
 1. proyecto2 (main)
  - PROYECTO2
