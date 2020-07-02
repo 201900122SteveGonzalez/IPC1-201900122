@@ -12,24 +12,24 @@
 
 ## Clases utilizadas
 
-#### 1.proyecto2 (main)
--PROYECTO2
--RecogeBloques
+#### 1. proyecto2 (main)
+-*PROYECTO2
+-*RecogeBloques
 
  
 #### 2. Hilos
--hilo_temporal
+-*hilo_temporal
  
 #### 3. Listas_simples
--Cola
--Nodo
--NodoBoton
--Pila
--Lista_objetos
--lista_simple
+-*Cola
+-*Nodo
+-*NodoBoton
+-*Pila
+-*Lista_objetos
+-*lista_simple
  
 #### 4. Listas_Doblemente_Enlazadas
--NodoCircularDoble
--NodoDoble
--lista_circular_doblemente_enlazada
--lista_doble
+*NodoCircularDoble
+*NodoDoble
+*lista_circular_doblemente_enlazada
+*lista_doble
