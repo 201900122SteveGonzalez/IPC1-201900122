@@ -11,9 +11,9 @@
 ## métodos utilizados
 
 ## Clases utilizadas
-### 1 proyecto2
-1.1.PROYECTO2
-1.2 RecogeBloques
+### 1 proyecto2 (main)
+#### 1.1.PROYECTO2
+##### 1.2 RecogeBloques
 ### 2 Hilos
 2.1 hilo_temporal
 ### 3 Listas_simples
