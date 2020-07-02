@@ -1,4 +1,4 @@
-#  MANUAL TÉCNICO
+#                                                                              **MANUAL TÉCNICO**
 ##  Requerimientos de la aplicacion:
 *Solaris OS versión 10 (x86/x64 Platform Edition): Procesador: AMD Opteron serie 1200 a 1,8 GHz. Memoria: 512 MB. Espacio en disco: 650 MB de espacio libre en el disco. 
  
