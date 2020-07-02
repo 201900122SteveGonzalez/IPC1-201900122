@@ -9,15 +9,15 @@
 ## Diagrama de clases (General)
 ![DIAGRAMA DE CLASES PROYECTO 2](https://user-images.githubusercontent.com/66354474/86331330-2ed8b080-bc06-11ea-819d-b4cf8fffd647.png)
 ## métodos utilizados
-### Listas enleadas
-  -Constructor
-  -get cabeza
-  -set cabeza
-  -insertar
-  -verificacion de existencia de nodo
-  -eliminar
-  -imprimior codigo graphviz
-  -reiniciar
+### Listas enlazadas
+    -Constructor
+    -get cabeza
+    -set cabeza
+    -insertar
+    -verificacion de existencia de nodo
+    -eliminar
+    -imprimior codigo graphviz
+    -reiniciar
 ### Nodos
 #### Nodo simples
      -constructor
