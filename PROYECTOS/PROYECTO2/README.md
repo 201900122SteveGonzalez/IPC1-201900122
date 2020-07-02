@@ -20,11 +20,11 @@
  - Cola
   - Nodo
    - NodoBoton
-    - Pila
-     - Lista_objetos
-      - lista_simple
+   - Pila
+   - Lista_objetos
+   - lista_simple
 4. Listas_Doblemente_Enlazadas
  - NodoCircularDoble
   - NodoDoble
    - lista_circular_doblemente_enlazada
-    - lista_doble
+   - lista_doble
