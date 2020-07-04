@@ -1,6 +1,4 @@
-<div align="center">
-# Introducción
-</div>
+## Introducción
 La computación en la nube utiliza una capa de red para conectar los dispositivos de punto periférico de los usuarios, como computadoras, smartphones y accesorios portátiles, a recursos centralizados en el data center. El software tradicional exigía, por lo general, un equipo completo de profesionales de TI, interno o externo, para lidiar con el inevitable conjunto de errores, desafíos de servicios y upgrades. El concepto de computación en la nube está libre de todos esos problemas y requisitos anticuados. 
 Un servidor central es el responsable de gestionar las demandas que hace el usuario desde el frontend hacia la nube a través de un software llamado middleware, que es el que permite que los ordenadores de red puedan comunicarse entre ellos sin inconvenientes. 
 Para evitar la pérdida de información en caso de que uno de los ordenadores de red falle, se realizan copias en varios lugares de tal manera que siempre se pueda tener acceso a una copia de la información.  
