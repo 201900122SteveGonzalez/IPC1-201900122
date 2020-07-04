@@ -1,2 +1,2 @@
 # EXAMEN FINAL parte práctica:
-[![IMAGE ALT TEXT HERE] https://www.youtube.com/watch?v=Ts95FISktwc&feature=youtu.be]
+[![Video](https://img.youtube.com/vi/Ts95FISktwc/0.jpg)](https://www.youtube.com/watch?v=Ts95FISktwc&feature=youtu.be)
